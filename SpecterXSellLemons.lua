@@ -213,8 +213,28 @@ CreateToggle("Auto Teleport Fruit",   function() return AutoFruit end,      func
 CreateToggle("Auto Rebirth",          function() return AutoRebirth end,    function(v) AutoRebirth = v end)
 CreateToggle("Auto Power Level",      function() return AutoPowerLevel end, function(v) AutoPowerLevel = v end)
 
--- TOGGLE BUTON
+-- TOGGLE BUTON DRAGGABLE
+local tbDragging, tbDragStart, tbStartPos, tbMoved
+ToggleBtn.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        tbDragging = true
+        tbMoved = false
+        tbDragStart = input.Position
+        tbStartPos = ToggleBtn.Position
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then tbDragging = false end
+        end)
+    end
+end)
+UserInputService.InputChanged:Connect(function(input)
+    if tbDragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+        local delta = input.Position - tbDragStart
+        if math.abs(delta.X) > 5 or math.abs(delta.Y) > 5 then tbMoved = true end
+        ToggleBtn.Position = UDim2.new(tbStartPos.X.Scale, tbStartPos.X.Offset + delta.X, tbStartPos.Y.Scale, tbStartPos.Y.Offset + delta.Y)
+    end
+end)
 ToggleBtn.MouseButton1Click:Connect(function()
+    if tbMoved then tbMoved = false return end
     if KeyFrame.Visible then return end
     MainFrame.Visible = not MainFrame.Visible
     ToggleBtn.BackgroundColor3 = MainFrame.Visible and Color3.fromRGB(0, 255, 150) or Color3.fromRGB(255, 0, 100)
