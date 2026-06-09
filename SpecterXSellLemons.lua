@@ -4,8 +4,9 @@ local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RS = game:GetService("ReplicatedStorage")
 
-local CORRECT_KEY = "script-beta2U9YPLGP8"
-local KEY_LINK = "https://work.ink/2CXm/specter-x-premium"
+-- Key System Data (GÜNCELLENDİ)
+local CORRECT_KEY = "57450894362176735-beta"
+local KEY_LINK = "https://loot-link.com/s?jNgcxhwz"
 
 local AutoBuy = false
 local AutoUpgrade = false
@@ -64,7 +65,7 @@ KeyTitle.Parent = KeyFrame
 local KeyInput = Instance.new("TextBox")
 KeyInput.Size = UDim2.new(0.85, 0, 0, 45)
 KeyInput.Position = UDim2.new(0.075, 0, 0, 70)
-KeyInput.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+KeyInput.BackgroundColor3 = Color3.fromRGB(255, 255, 35)
 KeyInput.Text = ""
 KeyInput.PlaceholderText = "Enter Key Here..."
 KeyInput.TextColor3 = Color3.fromRGB(255, 255, 255)
